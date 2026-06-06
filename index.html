@@ -4,23 +4,86 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Komorebi Table 予約サイト</title>
-  <meta name="description" content="空席確認、予約フォーム、メニュー表示を備えた飲食店予約サイトのデモ。">
-  <style>
-    :root{--ink:#18211b;--bg:#f6f8f4;--panel:#fff;--sage:#606c38;--clay:#c66b3d;--line:#d7dfd2;--muted:#657164;--shadow:0 24px 60px rgba(24,33,27,.12)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--bg);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.7}.wrap{width:min(1160px,calc(100% - 32px));margin:auto}img{display:block;max-width:100%}header{position:sticky;top:0;z-index:5;background:rgba(246,248,244,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav{min-height:70px;display:flex;justify-content:space-between;align-items:center;gap:18px}.logo{text-decoration:none;color:var(--ink);font-weight:900;font-size:22px}nav{display:flex;align-items:center;gap:24px;font-size:14px;font-weight:900}nav a{text-decoration:none;color:var(--ink)}.btn{border:1px solid var(--sage);background:var(--sage);color:#fff;border-radius:999px;padding:12px 18px;min-height:46px;display:inline-flex;align-items:center;justify-content:center;font-weight:900;text-decoration:none;cursor:pointer}.btn:hover{background:var(--clay);border-color:var(--clay)}.btn.secondary{background:transparent;color:var(--sage)}.btn.secondary:hover{color:#fff}.hero{padding:44px 0 72px}.hero-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:28px;align-items:stretch}.hero-copy{display:grid;align-content:center;padding:clamp(28px,5vw,62px);background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}.eyebrow{color:var(--clay);font-weight:900;margin:0 0 14px}h1{margin:0;font-size:clamp(42px,7vw,86px);line-height:1}h2{margin:0;font-size:clamp(30px,5vw,55px);line-height:1.08}.hero-copy p,.lead{color:var(--muted);font-size:clamp(16px,2vw,19px);max-width:660px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.hero-photo{border-radius:22px;overflow:hidden;min-height:560px;border:1px solid var(--line);box-shadow:var(--shadow)}.hero-photo img{width:100%;height:100%;object-fit:cover}section{padding:clamp(62px,8vw,104px) 0}.head{display:grid;grid-template-columns:360px 1fr;gap:30px;margin-bottom:28px}.lead{margin:0}.availability{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.slot{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;gap:12px;min-height:178px}.slot strong{font-size:25px}.slot span{color:var(--muted)}.slot button{width:100%}.slot[data-open=false]{opacity:.62}.slot[data-open=false] button{background:transparent;color:var(--muted);border-color:var(--line);cursor:not-allowed}.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.menu-card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 14px 34px rgba(24,33,27,.08)}.menu-card img{aspect-ratio:4/3;width:100%;object-fit:cover}.menu-card div{padding:20px}.menu-card h3{margin:0 0 8px;font-size:22px}.menu-card p{margin:0;color:var(--muted)}.price{display:inline-block;margin-top:14px;color:var(--clay);font-weight:900}.reservation{background:#18211b;color:#fff;border-radius:28px;padding:clamp(24px,5vw,46px);display:grid;grid-template-columns:.82fr 1.18fr;gap:26px;align-items:start}.reservation p{color:#d8e1d5}.summary{border:1px solid rgba(255,255,255,.22);border-radius:18px;padding:20px;margin-top:22px;color:#eef6eb}form{background:#fff;color:var(--ink);border-radius:22px;padding:22px;display:grid;gap:14px}.fields{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}label{display:grid;gap:7px;font-size:13px;font-weight:900}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 13px;font:inherit}textarea{min-height:96px}.status{color:var(--sage);font-weight:900;min-height:24px;margin:0}.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.info{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px}.info h3{margin:0 0 8px}.info p{margin:0;color:var(--muted)}footer{padding:34px 0;color:var(--muted);border-top:1px solid var(--line)}footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}@media(max-width:900px){nav a:not(.btn){display:none}.hero-grid,.head,.reservation{grid-template-columns:1fr}.hero-photo{min-height:340px}.availability,.menu-grid,.info-grid{grid-template-columns:1fr 1fr}}@media(max-width:640px){.availability,.menu-grid,.info-grid,.fields{grid-template-columns:1fr}.reservation{border-radius:20px}.hero-copy{padding:26px}}
-  </style>
+  <meta name="description" content="空席確認、予約フォーム、メニュー表示、予約キャンセルまで動く飲食店予約サイトのデモ。">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
 </head>
 <body>
-  <header><div class="wrap nav"><a class="logo" href="#top">Komorebi Table</a><nav><a href="#availability">空席確認</a><a href="#menu">メニュー</a><a href="#reservation">予約フォーム</a><a class="btn" href="#reservation">予約する</a></nav></div></header>
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#top">Komorebi Table</a>
+      <nav aria-label="主要ナビゲーション">
+        <a href="#availability">空席確認</a>
+        <a href="#menu">メニュー</a>
+        <a href="#reservation">予約フォーム</a>
+        <a class="btn" href="#reservation">予約する</a>
+      </nav>
+    </div>
+  </header>
+
   <main id="top">
-    <section class="hero"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">Restaurant reservation demo</p><h1>今日の空席を確認して、そのまま予約。</h1><p>空席状況、メニュー、予約フォームを1ページにまとめた飲食店予約サイトです。スマートフォンでも迷わず予約できます。</p><div class="actions"><a class="btn" href="#availability">空席を見る</a><a class="btn secondary" href="#menu">メニューを見る</a></div></div><figure class="hero-photo"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80" alt="温かい照明のレストラン店内"></figure></div></section>
-    <section id="availability"><div class="wrap"><div class="head"><h2>空席確認</h2><p class="lead">本日の席状況を時間帯ごとに表示します。空席がある時間は、予約フォームへ選択内容を反映できます。</p></div><div class="availability"><article class="slot" data-time="17:30" data-open="true"><span>ディナー</span><strong>17:30</strong><span>残り 4席</span><button class="btn">この時間で予約</button></article><article class="slot" data-time="19:00" data-open="true"><span>ディナー</span><strong>19:00</strong><span>残り 2席</span><button class="btn">この時間で予約</button></article><article class="slot" data-time="20:30" data-open="false"><span>ディナー</span><strong>20:30</strong><span>満席</span><button class="btn" disabled>満席</button></article><article class="slot" data-time="21:00" data-open="true"><span>バー利用</span><strong>21:00</strong><span>残り 6席</span><button class="btn">この時間で予約</button></article></div></div></section>
-    <section id="menu"><div class="wrap"><div class="head"><h2>メニュー表示</h2><p class="lead">料理写真、説明、価格を揃えて、予約前におすすめメニューを確認できます。</p></div><div class="menu-grid"><article class="menu-card"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80" alt="前菜プレート"><div><h3>季節野菜の前菜</h3><p>旬の野菜を中心に、軽く始められる盛り合わせです。</p><span class="price">¥1,280</span></div></article><article class="menu-card"><img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1000&q=80" alt="メイン料理のステーキ"><div><h3>グリルメイン</h3><p>肉料理または魚料理から選べる、ディナーの中心になる一皿です。</p><span class="price">¥2,600</span></div></article><article class="menu-card"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1000&q=80" alt="デザートとコーヒー"><div><h3>デザートセット</h3><p>食後のデザートとドリンクを組み合わせたセットです。</p><span class="price">¥980</span></div></article></div></div></section>
-    <section id="reservation"><div class="wrap reservation"><div><h2>予約フォーム</h2><p>空席で選んだ時間がフォームへ入ります。人数、名前、連絡先を入力すると予約内容を確認できます。</p><div class="summary" id="summary">選択中の時間: 未選択</div></div><form id="form"><div class="fields"><label>予約日<input type="date" name="date" required></label><label>時間<select name="time" id="time" required><option value="">選択してください</option><option>17:30</option><option>19:00</option><option>21:00</option></select></label></div><div class="fields"><label>人数<select name="party" required><option>2名</option><option>3名</option><option>4名</option><option>5名以上</option></select></label><label>お名前<input name="name" required placeholder="山田 太郎"></label></div><label>電話番号<input name="tel" required placeholder="090-0000-0000"></label><label>ご要望<textarea name="note" placeholder="アレルギー、席の希望など"></textarea></label><button class="btn" type="submit">予約内容を確認する</button><p class="status" id="status" role="status"></p></form></div></section>
-    <section><div class="wrap info-grid"><article class="info"><h3>営業時間</h3><p>Lunch 11:30-14:30 / Dinner 17:30-22:00</p></article><article class="info"><h3>席タイプ</h3><p>テーブル席、カウンター席、少人数向けの半個室に対応します。</p></article><article class="info"><h3>キャンセル</h3><p>予約変更やキャンセル導線は、実運用で管理画面に接続できます。</p></article></div></section>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Restaurant reservation demo</p>
+          <h1>空席を確認して、そのまま予約。</h1>
+          <p>日付、時間、人数を選ぶと予約が保存され、空席数が更新されます。キャンセルすると席数も戻ります。</p>
+          <div class="actions"><a class="btn" href="#availability">空席を見る</a><a class="btn secondary" href="#menu">メニューを見る</a></div>
+        </div>
+        <figure class="hero-photo"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80" alt="温かい照明のレストラン店内"></figure>
+      </div>
+    </section>
+
+    <section id="availability">
+      <div class="wrap">
+        <div class="head"><h2>空席確認</h2><p class="lead">日付ごとに予約状況を計算します。空席のある時間を選ぶとフォームに反映されます。</p></div>
+        <label class="date-picker">来店日<input type="date" id="selectedDate"></label>
+        <div class="availability" id="slotsRoot"></div>
+      </div>
+    </section>
+
+    <section id="menu">
+      <div class="wrap">
+        <div class="head"><h2>メニュー表示</h2><p class="lead">おすすめメニューをJavaScriptで表示しています。</p></div>
+        <div class="menu-grid" id="menuRoot"></div>
+      </div>
+    </section>
+
+    <section id="reservation">
+      <div class="wrap reservation">
+        <div>
+          <h2>予約フォーム</h2>
+          <p>空席で選んだ時間がフォームへ入ります。送信すると予約一覧に追加され、残席数が変わります。</p>
+          <div class="summary" id="summary">選択中の時間: 未選択</div>
+        </div>
+        <form id="reservationForm">
+          <div class="fields"><label>予約日<input type="date" name="date" id="formDate" required></label><label>時間<select name="time" id="timeSelect" required><option value="">選択してください</option></select></label></div>
+          <div class="fields"><label>人数<select name="party" id="partySelect" required><option value="2">2名</option><option value="3">3名</option><option value="4">4名</option><option value="5">5名以上</option></select></label><label>お名前<input name="name" autocomplete="name" required placeholder="山田 太郎"></label></div>
+          <label>電話番号<input name="tel" autocomplete="tel" required placeholder="090-0000-0000"></label>
+          <label>ご要望<textarea name="note" placeholder="アレルギー、席の希望など"></textarea></label>
+          <button class="btn" type="submit">予約を保存する</button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="bookings">
+      <div class="wrap">
+        <div class="head"><h2>予約一覧</h2><p class="lead">保存された予約を表示します。キャンセルすると空席数が戻ります。</p></div>
+        <div class="booking-toolbar"><strong id="bookingCount">0件の予約</strong><button class="btn secondary" id="resetBookings">予約を初期化</button></div>
+        <div class="booking-list" id="bookingList"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap info-grid">
+        <article class="info"><h3>営業時間</h3><p>Lunch 11:30-14:30 / Dinner 17:30-22:00</p></article>
+        <article class="info"><h3>席タイプ</h3><p>テーブル席、カウンター席、少人数向けの半個室に対応します。</p></article>
+        <article class="info"><h3>実運用の接続先</h3><p>このデモの保存処理をAPIに置き換えると、店舗管理画面や通知に接続できます。</p></article>
+      </div>
+    </section>
   </main>
+
   <footer><div class="wrap"><strong>Komorebi Table</strong><span>Restaurant reservation website demo</span></div></footer>
-  <script>
-    document.querySelector('input[type="date"]').value=new Date().toISOString().slice(0,10);const time=document.getElementById('time'),summary=document.getElementById('summary'),status=document.getElementById('status');document.querySelectorAll('.slot[data-open="true"] button').forEach(b=>b.onclick=()=>{const t=b.closest('.slot').dataset.time;time.value=t;summary.textContent=`選択中の時間: ${t}`;document.getElementById('reservation').scrollIntoView({behavior:'smooth'})});time.onchange=()=>summary.textContent=`選択中の時間: ${time.value||'未選択'}`;document.getElementById('form').onsubmit=e=>{e.preventDefault();const d=new FormData(e.currentTarget);status.textContent=`${d.get('name')}様、${d.get('date')} ${d.get('time')} / ${d.get('party')} の予約内容を確認しました。`};
-  </script>
 </body>
 </html>
