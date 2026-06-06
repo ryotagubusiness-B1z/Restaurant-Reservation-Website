@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Komorebi Table 予約サイト</title>
-  <meta name="description" content="空席確認、予約フォーム、メニュー表示、予約キャンセルまで動く飲食店予約サイトのデモ。">
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="app.js"></script>
+  <meta content="空席確認、予約フォーム、メニュー表示、予約キャンセルまで動く飲食店予約サイトのデモ。" name="description">
+  <link href="styles.css" rel="stylesheet">
+  <script src="app.js" defer></script>
 </head>
 <body>
   <header>
-    <div class="wrap nav">
-      <a class="logo" href="#top">Komorebi Table</a>
+    <div class="nav wrap">
+      <a href="#top" class="logo">Komorebi Table</a>
       <nav aria-label="主要ナビゲーション">
         <a href="#availability">空席確認</a>
         <a href="#menu">メニュー</a>
         <a href="#reservation">予約フォーム</a>
-        <a class="btn" href="#reservation">予約する</a>
+        <a href="#reservation" class="btn">予約する</a>
       </nav>
     </div>
   </header>
@@ -28,62 +28,131 @@
           <p class="eyebrow">Restaurant reservation demo</p>
           <h1>空席を確認して、そのまま予約。</h1>
           <p>日付、時間、人数を選ぶと予約が保存され、空席数が更新されます。キャンセルすると席数も戻ります。</p>
-          <div class="actions"><a class="btn" href="#availability">空席を見る</a><a class="btn secondary" href="#menu">メニューを見る</a></div>
+          <div class="actions">
+            <a class="btn" href="#availability">空席を見る</a>
+            <a href="#menu" class="btn secondary">メニューを見る</a>
+          </div>
         </div>
-        <figure class="hero-photo"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80" alt="温かい照明のレストラン店内"></figure>
+
+        <figure class="hero-photo">
+          <img alt="温かい照明のレストラン店内" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80">
+        </figure>
       </div>
     </section>
 
     <section id="availability">
       <div class="wrap">
-        <div class="head"><h2>空席確認</h2><p class="lead">日付ごとに予約状況を計算します。空席のある時間を選ぶとフォームに反映されます。</p></div>
-        <label class="date-picker">来店日<input type="date" id="selectedDate"></label>
-        <div class="availability" id="slotsRoot"></div>
+        <div class="head">
+          <h2>空席確認</h2>
+          <p class="lead">日付ごとに予約状況を計算します。空席のある時間を選ぶとフォームに反映されます。</p>
+        </div>
+        <label class="date-picker">
+          来店日
+          <input id="selectedDate" type="date">
+        </label>
+        <div id="slotsRoot" class="availability"></div>
       </div>
     </section>
 
     <section id="menu">
       <div class="wrap">
-        <div class="head"><h2>メニュー表示</h2><p class="lead">おすすめメニューをJavaScriptで表示しています。</p></div>
+        <div class="head">
+          <h2>メニュー表示</h2>
+          <p class="lead">おすすめメニューをJavaScriptで表示しています。</p>
+        </div>
         <div class="menu-grid" id="menuRoot"></div>
       </div>
     </section>
 
     <section id="reservation">
-      <div class="wrap reservation">
+      <div class="reservation wrap">
         <div>
           <h2>予約フォーム</h2>
           <p>空席で選んだ時間がフォームへ入ります。送信すると予約一覧に追加され、残席数が変わります。</p>
-          <div class="summary" id="summary">選択中の時間: 未選択</div>
+          <div id="summary" class="summary">選択中の時間: 未選択</div>
         </div>
+
         <form id="reservationForm">
-          <div class="fields"><label>予約日<input type="date" name="date" id="formDate" required></label><label>時間<select name="time" id="timeSelect" required><option value="">選択してください</option></select></label></div>
-          <div class="fields"><label>人数<select name="party" id="partySelect" required><option value="2">2名</option><option value="3">3名</option><option value="4">4名</option><option value="5">5名以上</option></select></label><label>お名前<input name="name" autocomplete="name" required placeholder="山田 太郎"></label></div>
-          <label>電話番号<input name="tel" autocomplete="tel" required placeholder="090-0000-0000"></label>
-          <label>ご要望<textarea name="note" placeholder="アレルギー、席の希望など"></textarea></label>
-          <button class="btn" type="submit">予約を保存する</button>
-          <p class="form-status" id="formStatus" role="status"></p>
+          <div class="fields">
+            <label>
+              予約日
+              <input name="date" id="formDate" type="date" required>
+            </label>
+            <label>
+              時間
+              <select id="timeSelect" name="time" required>
+                <option value="">選択してください</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="fields">
+            <label>
+              人数
+              <select name="party" id="partySelect" required>
+                <option value="2">2名</option>
+                <option value="3">3名</option>
+                <option value="4">4名</option>
+                <option value="5">5名以上</option>
+              </select>
+            </label>
+            <label>
+              お名前
+              <input required name="name" autocomplete="name" placeholder="山田 太郎">
+            </label>
+          </div>
+
+          <label>電話番号
+            <input name="tel" required autocomplete="tel" placeholder="090-0000-0000">
+          </label>
+          <label>
+            ご要望
+            <textarea name="note" placeholder="アレルギー、席の希望など"></textarea>
+          </label>
+
+          <button type="submit" class="btn">予約を保存する</button>
+          <p role="status" class="form-status" id="formStatus"></p>
         </form>
       </div>
     </section>
 
     <section id="bookings">
       <div class="wrap">
-        <div class="head"><h2>予約一覧</h2><p class="lead">保存された予約を表示します。キャンセルすると空席数が戻ります。</p></div>
-        <div class="booking-toolbar"><strong id="bookingCount">0件の予約</strong><button class="btn secondary" id="resetBookings">予約を初期化</button></div>
+        <div class="head">
+          <h2>予約一覧</h2>
+          <p class="lead">保存された予約を表示します。キャンセルすると空席数が戻ります。</p>
+        </div>
+        <div class="booking-toolbar">
+          <strong id="bookingCount">0件の予約</strong>
+          <button class="btn secondary" id="resetBookings">予約を初期化</button>
+        </div>
         <div class="booking-list" id="bookingList"></div>
       </div>
     </section>
 
     <section>
       <div class="wrap info-grid">
-        <article class="info"><h3>営業時間</h3><p>Lunch 11:30-14:30 / Dinner 17:30-22:00</p></article>
-        <article class="info"><h3>席タイプ</h3><p>テーブル席、カウンター席、少人数向けの半個室に対応します。</p></article>
-        <article class="info"><h3>実運用の接続先</h3><p>このデモの保存処理をAPIに置き換えると、店舗管理画面や通知に接続できます。</p></article>
+        <article class="info">
+          <h3>営業時間</h3>
+          <p>Lunch 11:30-14:30 / Dinner 17:30-22:00</p>
+        </article>
+        <article class="info">
+          <h3>席タイプ</h3>
+          <p>テーブル席、カウンター席、少人数向けの半個室に対応します。</p>
+        </article>
+        <article class="info">
+          <h3>実運用の接続先</h3>
+          <p>このデモの保存処理をAPIに置き換えると、店舗管理画面や通知に接続できます。</p>
+        </article>
       </div>
     </section>
   </main>
 
-  <footer><div class="wrap"><strong>Komorebi Table</strong><span>Restaurant reservation website demo</span></div></footer>
+  <footer>
+    <div class="wrap">
+      <strong>Komorebi Table</strong>
+      <span>Restaurant reservation website demo</span>
+    </div>
+  </footer>
 </body>
 </html>
